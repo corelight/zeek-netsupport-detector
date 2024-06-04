@@ -1,9 +1,8 @@
 [package]
 script_dir = scripts
 test_command = cd testing && btest -c btest.cfg
-summary = TODO: A summary of NetSupport in one line
-description = TODO: A more detailed description of NetSupport.
-	It can span multiple lines, with this indentation.
+summary = A Zeek base NetSupport detector. NetSupport is often abused by attackers in malware.
+description = A Zeek base NetSupport detector. NetSupport is often abused by attackers in malware.
 depends = 
 	zeek >=4.0.0
 
