@@ -18,7 +18,7 @@ event http_header(c: connection, is_orig: bool, original_name: string,
 	local msg = "NetSupport (potential malware) C2, detected via HTTP headers.";
 
 	NOTICE([ $note=NetSupport::C2_Traffic_Observed_HTTP_Headers, $msg=msg, $conn=c,
-	    $identifier=cat(c$id$orig_h, c$id$resp_h) ]);
+	    $identifier=c$uid ]);
 	}
 
 # Signature match function for CMD=ENCD
@@ -29,8 +29,7 @@ function netsupport_cmd_encd_match(state: signature_state, data: string): bool
 	local msg = "NetSupport (potential malware) C2, detected by CMD=ENCD in connection.  Payload is in sub field.";
 
 	NOTICE([ $note=NetSupport::C2_Traffic_Observed_CMD_ENCD, $msg=msg, $sub=data,
-	    $conn=state$conn, $identifier=cat(state$conn$id$orig_h,
-	    state$conn$id$resp_h) ]);
+	    $conn=state$conn, $identifier=state$conn$uid ]);
 
 	return T;
 	}
@@ -43,8 +42,7 @@ function netsupport_cmd_poll_match(state: signature_state, data: string): bool
 	local msg = "NetSupport (potential malware) C2, detected by CMD=POLL in connection.  Payload is in sub field.";
 
 	NOTICE([ $note=NetSupport::C2_Traffic_Observed_CMD_POLL, $msg=msg, $sub=data,
-	    $conn=state$conn, $identifier=cat(state$conn$id$orig_h,
-	    state$conn$id$resp_h) ]);
+	    $conn=state$conn, $identifier=state$conn$uid ]);
 
 	return T;
 	}
