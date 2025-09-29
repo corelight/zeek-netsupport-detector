@@ -1,9 +1,19 @@
 module NetSupport;
 
 export {
-	## The notice when NetSupport C2 is observed.
-	redef enum Notice::Type += { C2_Traffic_Observed_HTTP_Headers,
-	    C2_Traffic_Observed_CMD_ENCD, C2_Traffic_Observed_CMD_POLL };
+	redef enum Notice::Type += {
+		## NetSupport C2 activity detected based on a distinctive HTTP
+		## User-Agent string.
+		C2_Traffic_Observed_HTTP_Headers,
+
+		## Detected the NetSupport C2 parameter CMD=ENCD, used for
+		## transferring encoded data common in malicious implants.
+		C2_Traffic_Observed_CMD_ENCD,
+
+		## A NetSupport C2 polling command (CMD=POLL) was observed, indicating
+		## a C2 check-in.
+		C2_Traffic_Observed_CMD_POLL
+	};
 }
 
 event http_header(c: connection, is_orig: bool, original_name: string,
